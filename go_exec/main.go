@@ -49,7 +49,7 @@ func main() {
 		log.Fatalf("Failed to marshal final swagger: %v", err)
 	}
 
-	filePath := "../bucket/final_swagger.json"
+	filePath := "bucket/final_swagger.json"
 	err = WriteToFile(filePath, data)
 	if err != nil {
 		log.Fatalf("Failed to write final swagger to file: %v", err)

@@ -13,8 +13,7 @@ echo "Running Go executable..."
 
 echo "Setting up Python environment..."
 cd python_exec
-python3 -m venv venv
-source venv/bin/activate
+python -m venv venv
 
 echo "Installing Python dependencies..."
 pip install -r requirements.txt
@@ -22,7 +21,18 @@ pip install -r requirements.txt
 echo "Running Python script..."
 python app.py
 
-# Deactivate virtual environment
-deactivate
+echo "Opening summary.json..."
+summary_path="$(realpath ../bucket/summary.json)"
+
+# Open the file based on OS
+if [[ "$OSTYPE" == "darwin"* ]]; then
+    open "$summary_path"  # macOS
+elif [[ "$OSTYPE" == "linux-gnu"* ]]; then
+    xdg-open "$summary_path"  # Linux
+elif [[ "$OSTYPE" == "msys" || "$OSTYPE" == "cygwin" ]]; then
+    start "" "$summary_path"  # Windows (Git Bash or Cygwin)
+else
+    echo "Unsupported OS. Open the file manually: $summary_path"
+fi
 
 echo "Execution completed."

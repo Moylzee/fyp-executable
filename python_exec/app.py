@@ -1,9 +1,6 @@
 import json
-import os
 from datetime import datetime
-from utils.common import ReadFromS3, unflatten_dict, upload_file_to_s3
 from compare_swaggers_python.compare import compare_files
-from post_to_chat.post import post_to_chat
 
 def write_to_file(file_path, content):
     with open(file_path, 'w') as file:
